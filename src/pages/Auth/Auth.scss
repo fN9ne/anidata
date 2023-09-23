@@ -1,0 +1,166 @@
+@import '../../scss/vars';
+
+.auth {
+	height: 100%;
+	padding: 20px;
+
+	@media (max-width: 1480px) {
+		padding: calc(15px + 5 * ((100vw - 375px) / (1480 - 375)));
+	}
+
+	@media (max-width: 375px) {
+		padding: 15px;
+	}
+
+	&__body {
+		height: 100%;
+		overflow: auto;
+	}
+
+	&__wrapper {
+		min-height: 440px;
+		height: 100%;
+	}
+
+	&__container {
+		height: 100%;
+		max-width: 340px;
+		width: 100%;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 16px;
+	}
+
+	&__logo,
+	.text {
+		width: 100%;
+	}
+
+	.text {
+		text-align: center;
+	}
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	padding: 24px 28px;
+	border-radius: 15px;
+	border: 2px solid $border1;
+	background-color: $white2;
+	position: relative;
+
+	@media (max-width: 1480px) {
+		padding: calc(16px + 8 * ((100vw - 375px) / (1480 - 375))) calc(16px + 12 * ((100vw - 375px) / (1480 - 375)));
+	}
+
+	@media (max-width: 375px) {
+		padding: 16px;
+	}
+
+	h2 {
+		align-self: center;
+	}
+
+	&__body {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	&__footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&__toggle {
+		color: $black2;
+		font-size: 12px;
+		transition: 250ms;
+
+		&:hover {
+			@media #{$mouse-device} {
+				color: $black1;
+			}
+		}
+
+		&:active {
+			color: $black1;
+		}
+	}
+
+	&__submit {
+		padding: 0 20px;
+	}
+
+	.loader {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		top: 0;
+		left: 0;
+		border-radius: 15px;
+		backdrop-filter: blur(2px);
+		background-color: rgba(20, 23, 61, 0.05);
+	}
+}
+
+.form-item {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+
+	&__field {
+		position: relative;
+	}
+
+	&__checkmark {
+		position: absolute;
+		top: 50%;
+		right: 12px;
+		translate: 0 -50%;
+		opacity: 0;
+		scale: 0.8;
+		transition: 250ms;
+
+		&_active {
+			opacity: 1;
+			scale: 1;
+		}
+	}
+
+	&__label {
+		align-self: flex-start;
+		font-size: 12px;
+		font-weight: 500;
+		cursor: pointer;
+	}
+
+	input {
+		width: 100%;
+		height: 36px;
+		border-radius: 10px;
+		padding: 0 10px;
+		border: 2px solid $border2;
+		background-color: $white3;
+		color: $black1;
+		transition: 250ms;
+
+		&:hover {
+			@media #{$mouse-device} {
+				border-color: $border2hover;
+			}
+		}
+
+		&:focus {
+			border-color: $border2active;
+		}
+	}
+}

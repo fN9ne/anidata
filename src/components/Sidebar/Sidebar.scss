@@ -1,0 +1,129 @@
+@import '../../scss/vars';
+
+.sidebar {
+	flex: 0 0 300px;
+	padding: 40px 32px;
+	border-right: 2px solid $border1;
+
+	&__content {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	&__main {
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+	}
+
+	&__logo {
+		width: 132px;
+	}
+}
+
+.profile {
+	&__username {
+		margin: 16px 0 0 0;
+		display: flex;
+		align-items: center;
+		gap: 12px;
+
+		span {
+			font-weight: 500;
+			font-size: 23px;
+			color: $black1;
+		}
+	}
+
+	&__logout {
+		margin: 8px 0 0 0;
+		background-color: transparent;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+
+		span {
+			font-size: 16px;
+			color: $black2;
+			transition: 350ms;
+		}
+
+		svg path {
+			transition: 350ms;
+		}
+
+		&:hover {
+			@media #{$mouse-device} {
+				span {
+					color: $black1;
+				}
+
+				svg path {
+					stroke-opacity: 1;
+				}
+			}
+		}
+	}
+}
+
+.nav {
+	&__list {
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+	}
+
+	&-item {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+
+		&__list {
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+		}
+
+		&__link {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			border-radius: 10px;
+			padding: 11px 14px;
+			color: $black2;
+			transition: 350ms;
+
+			svg {
+				width: 18px;
+				height: 18px;
+
+				path {
+					stroke: $black2;
+					transition: 350ms;
+				}
+			}
+
+			&.active {
+				background-color: #D3E3F5;
+				color: $black1;
+
+				svg path {
+					stroke: $black1;
+				}
+			}
+
+			&:hover {
+				@media #{$mouse-device} {
+					background-color: #e4f0fd;
+					color: $black1;
+
+					svg path {
+						stroke: $black1;
+					}
+				}
+			}
+		}
+	}
+}
