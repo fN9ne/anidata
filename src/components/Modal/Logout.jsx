@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Layout from "./Layout";
-import { toggleLogoutModalAction, throwUserAction } from "../../redux/reducers";
+import { toggleLogoutModalAction, throwUserAction, catalogActions } from "../../redux/reducers";
 
 const Logout = () => {
 	const dispatch = useDispatch();
@@ -11,17 +11,18 @@ const Logout = () => {
 	const logOut = () => {
 		closeModal();
 		dispatch(throwUserAction());
+		dispatch(catalogActions.clearState());
 		navigate("/auth");
 	};
 
 	return (
-		<Layout className="logout-modal">
+		<Layout className="modal1">
 			<h2>Are you sure?</h2>
 			<div className="text">
 				By clicking on the "Log out" button, you will log out of your account and will not be able to use the service until you
 				log in.
 			</div>
-			<div className="logout-modal__footer">
+			<div className="modal1__footer">
 				<button onClick={logOut} className="button">
 					Log out
 				</button>

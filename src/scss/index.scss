@@ -37,6 +37,11 @@
 	font-size: 14px;
 	line-height: 1.5;
 	color: $black2;
+
+	span {
+		color: $black1;
+		font-weight: 700;
+	}
 }
 
 h2 {
@@ -49,6 +54,13 @@ h3 {
 	font-weight: 400;
 	text-transform: uppercase;
 	font-size: 14px;
+}
+
+h4 {
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 400;
+	color: $black2;
 }
 
 .error {
@@ -83,6 +95,48 @@ h3 {
 		gap: 4px;
 	}
 
+	&_red {
+		background-color: #FFD8D8;
+
+		&:hover {
+			@media #{$mouse-device} {
+				background-color: #ffe2e2;
+			}
+		}
+
+		&:active {
+			background-color: #eec5c5;
+		}
+	}
+
+	&_lightblue {
+		background-color: #D3E3F5;
+
+		&:hover {
+			@media #{$mouse-device} {
+				background-color: #e3f0ff;
+			}
+		}
+
+		&:active {
+			background-color: #c2d5eb;
+		}
+	}
+
+	&_lightseablue {
+		background-color: #C3D8FF;
+
+		&:hover {
+			@media #{$mouse-device} {
+				background-color: #b7cdf7;
+			}
+		}
+
+		&:active {
+			background-color: #aac1eb;
+		}
+	}
+
 	&_gray {
 		background-color: #eee;
 
@@ -90,6 +144,10 @@ h3 {
 			@media #{$mouse-device} {
 				background-color: #e2e2e2;
 			}
+		}
+
+		&:active {
+			background-color: #dbdbdb;
 		}
 	}
 
@@ -102,4 +160,74 @@ h3 {
 .app {
 	display: flex;
 	height: 100%;
+
+	@media (max-width: 768px) {
+		display: block;
+	}
+}
+
+.body {
+	width: 100%;
+	padding: 0 32px;
+
+	@media (max-width: 1480px) {
+		padding: 0 calc(20px + 12 * ((100vw - 996px) / (1480 - 996)));
+	}
+
+	@media (max-width: 996px) {
+		padding: 0 20px;
+	}
+
+	@media (max-width: 768px) {
+		height: calc(100% - 82px);
+		padding: 0 calc(10px + 10 * ((100vw - 425px) / (768 - 425)));
+	}
+
+	@media (max-width: 425px) {
+		padding: 0 10px;
+	}
+}
+
+.type {
+	padding: 0 12px 0;
+	height: 32px;
+	text-align: center;
+	font-size: 16px;
+	font-weight: 700;
+	border-radius: 8px;
+	color: $black1;
+	background-color: #ebebeb;
+	line-height: 32px;
+
+	&_tv {
+		background-color: #BAE9BC;
+	}
+
+	&_movie {
+		background-color: #E8B1B1;
+	}
+
+	&_ona {
+		background-color: #e3b1e8;
+	}
+
+	&_ova {
+		background-color: #b1b2e8;
+	}
+
+	&_special {
+		background-color: #e8e3b1;
+	}
+
+	&_music {
+		background-color: #c4b1e8;
+	}
+}
+
+.year {
+	font-size: 18px;
+	font-weight: 700;
+	font-family: 'Space Mono', monospace;
+	line-height: 20px;
+	color: $black1;
 }

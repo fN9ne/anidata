@@ -1,0 +1,87 @@
+@import '../../scss/vars';
+
+.pagination {
+	display: flex;
+	align-items: center;
+	font-family: 'Space Mono', monospace;
+	gap: 16px;
+
+	&__display {
+		font-size: 24px;
+		color: $black1;
+		font-weight: 700;
+		user-select: none;
+	}
+
+	&__arrow {
+		background-color: transparent;
+		display: flex;
+		align-items: center;
+		user-select: none;
+		gap: 8px;
+		height: 24px;
+		transition: 350ms;
+
+		span {
+			color: $black1;
+			transition: 350ms;
+		}
+
+		svg {
+			transition: 350ms;
+		}
+
+		&:hover {
+			@media #{$mouse-device} {
+				span {
+					transition: 350ms;
+				}
+
+				svg {
+					transition: 350ms 100ms;
+				}
+			}
+		}
+
+		&_next {
+			svg {
+				rotate: 180deg;
+			}
+
+			&:hover {
+				@media #{$mouse-device} {
+					span {
+						translate: 2px 0;
+					}
+
+					svg {
+						translate: 4px 0;
+					}
+				}
+			}
+		}
+
+		&_prev {
+			&:hover {
+				@media #{$mouse-device} {
+					span {
+						translate: -2px 0;
+					}
+
+					svg {
+						translate: -4px 0;
+					}
+				}
+			}
+		}
+
+		&:active {
+			scale: 0.9;
+		}
+
+		&:disabled {
+			opacity: 0.5;
+			pointer-events: none;
+		}
+	}
+}

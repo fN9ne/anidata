@@ -6,7 +6,9 @@ const AppLayout = () => {
 	return (
 		<AnimatePage className="app">
 			<Sidebar />
-			<Outlet />
+			<div className="body">
+				<Outlet />
+			</div>
 		</AnimatePage>
 	);
 };

@@ -1,0 +1,210 @@
+@import '../../scss/vars';
+
+.filter-button {
+	width: 30px;
+	height: 30px;
+	border-radius: 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: transparent;
+	transition: 350ms;
+	position: relative;
+	z-index: 3;
+
+	svg path {
+		transition: 350ms;
+	}
+
+	&_active {
+		border: 2px solid $border1;
+		background-color: #F6F6F6;
+
+		svg path {
+			fill-opacity: 1;
+		}
+
+		&:hover {
+			@media #{$mouse-device} {
+				opacity: 0.6;
+			}
+		}
+	}
+
+	&:hover {
+		@media #{$mouse-device} {
+			svg path {
+				fill-opacity: 1;
+			}
+		}
+	}
+}
+
+.filter {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	background: rgba(35, 37, 55, 0.80);
+	z-index: 2;
+	left: 0;
+	top: 0;
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	&__body {
+		position: absolute;
+		transition: 350ms;
+		background-color: #f6f6f6;
+		border-radius: 8px;
+		border: 2px solid $border1;
+		padding: 16px;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+
+		@media (max-width: 425px) {
+			padding: 12px;
+		}
+	}
+}
+
+.filter-item {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.selectbox {
+	position: relative;
+
+	&__field {
+		width: 240px;
+		height: 40px;
+		padding: 2px 14px 0;
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		justify-content: space-between;
+		background-color: #fff;
+		border: 2px solid $border2;
+		border-radius: 6px;
+		cursor: pointer;
+		transition: 350ms;
+
+		&>svg {
+			flex: 0 0 6px;
+		}
+
+		&:hover {
+			@media #{$mouse-device} {
+				opacity: 0.7;
+			}
+		}
+	}
+
+	&__value {
+		width: 100%;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+
+	&__placeholder {
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 500;
+		color: $black2;
+		user-select: none;
+	}
+
+	&__content {
+		width: calc(100% - 6px);
+		position: absolute;
+		z-index: 2;
+		top: 100%;
+		left: 3px;
+		translate: 0 2px;
+		background-color: #fff;
+		border-radius: 6px;
+		border: 2px solid $border2;
+		box-shadow: 0px 0px 15px 0px rgba(32, 32, 48, 0.15);
+		padding: 10px 8px;
+		height: auto;
+
+		&_big {
+			height: 260px;
+		}
+	}
+
+	&__wrapper {
+		height: 100%;
+		overflow: auto;
+	}
+
+	&__track {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		padding: 0 4px 0 0;
+	}
+
+	&__checkmark {
+		width: 18px;
+		height: 18px;
+		border-radius: 5px;
+		background-color: rgba(228, 229, 255, 0.70);
+		transition: 350ms;
+		display: flex;
+		justify-content: center;
+		padding: 2px 0 0 0;
+		align-items: center;
+
+		svg {
+			scale: 0;
+			transition: 350ms;
+		}
+	}
+
+	&__item {
+		display: flex;
+		align-items: center;
+		padding: 0 8px;
+		gap: 12px;
+		height: 36px;
+		background-color: #f9f9f9;
+		border-radius: 6px;
+		border: 2px solid #CDCEFC;
+		cursor: pointer;
+		transition: 350ms;
+
+		span {
+			color: $black1;
+			transition: 350ms;
+		}
+
+		&:hover {
+			@media #{$mouse-device} {
+				border-color: $border2active;
+
+				span {
+					color: $black3;
+				}
+			}
+		}
+
+		&_active {
+			.selectbox {
+				&__checkmark {
+					background-color: #CDCEFC;
+
+					svg {
+						scale: 1;
+					}
+				}
+			}
+		}
+	}
+}

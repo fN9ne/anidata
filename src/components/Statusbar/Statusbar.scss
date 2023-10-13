@@ -1,0 +1,25 @@
+.statusbar {
+	display: flex;
+	justify-content: space-between;
+
+	&__main {
+		display: flex;
+		align-items: center;
+		gap: 24px;
+
+		@media (max-width: 768px) {
+			gap: 8px;
+		}
+
+		@media (max-width: 424px) {
+			width: 100%;
+			justify-content: space-between;
+		}
+	}
+
+	@media (max-width: 424px) {
+		.pagination {
+			display: none;
+		}
+	}
+}

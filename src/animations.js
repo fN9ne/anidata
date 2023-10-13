@@ -16,6 +16,12 @@ export const scaleDown = {
 	exit: { opacity: 0, scale: 0.95, y: 30 },
 	transition: { duration: 0.35, ease: "easeInOut" },
 };
+export const slideRight = {
+	initial: { opacity: 0, x: 35 },
+	animate: { opacity: 1, x: 0 },
+	exit: { opacity: 0, x: 35 },
+	transition: { duration: 0.35, ease: "easeInOut" },
+};
 export const height = (height) => {
 	return {
 		initial: { opacity: 0, height: 0 },

@@ -1,40 +1,53 @@
 import "./Sidebar.scss";
 
 import Navbar from "./components/Navbar";
+import Profile from "./components/Profile";
 
 import { ReactComponent as Logo } from "../../img/logo.svg";
-import { ReactComponent as UserIcon } from "../../img/icons/user.svg";
-import { ReactComponent as LogOutIcon } from "../../img/icons/logout.svg";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleLogoutModalAction } from "../../redux/reducers";
+
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { opacity, slideRight } from "../../animations";
 
 const Sidebar = () => {
-	const username = useSelector((state) => state.user.username);
+	const [isBurgerActive, setBurgerActive] = useState(false);
 
-	const dispatch = useDispatch();
-
-	const openLogoutModal = () => dispatch(toggleLogoutModalAction(true));
+	const closeBurger = (event) => !event.target.closest(".sidebar-burger-content__body") && setBurgerActive(false);
 
 	return (
-		<aside className="sidebar">
-			<div className="sidebar__content">
-				<div className="sidebar__main">
-					<Logo className="sidebar__logo" />
-					<Navbar />
-				</div>
-				<div className="profile">
-					<h3>Profile</h3>
-					<div className="profile__username">
-						<UserIcon />
-						<span>{username}</span>
+		<>
+			<aside className="sidebar">
+				<div className="sidebar__content">
+					<div className="sidebar__main">
+						<Logo className="sidebar__logo" />
+						<Navbar />
 					</div>
-					<button onClick={openLogoutModal} className="profile__logout">
-						<LogOutIcon />
-						<span>Log out</span>
-					</button>
+					<Profile />
+					<div
+						onClick={() => setBurgerActive((prev) => !prev)}
+						className={`sidebar-burger-menu${isBurgerActive ? " sidebar-burger-menu_active" : ""}`}
+					>
+						<svg viewBox="0 0 32 32">
+							<path
+								className="sidebar-burger-menu__line sidebar-burger-menu__line_top-bottom"
+								d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"
+							></path>
+							<path className="sidebar-burger-menu__line" d="M7 16 27 16"></path>
+						</svg>
+					</div>
 				</div>
-			</div>
-		</aside>
+			</aside>
+			<AnimatePresence>
+				{isBurgerActive && (
+					<motion.div onClick={closeBurger} {...opacity} className="sidebar-burger-content">
+						<motion.div {...slideRight} className="sidebar-burger-content__body">
+							<Navbar />
+							<Profile />
+						</motion.div>
+					</motion.div>
+				)}
+			</AnimatePresence>
+		</>
 	);
 };
 
