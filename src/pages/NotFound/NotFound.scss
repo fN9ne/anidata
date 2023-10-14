@@ -1,0 +1,139 @@
+@import '../../scss/vars';
+
+.notfound {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		padding: 0 20px;
+	}
+
+	&__status {
+		font-family: 'Space Mono', monospace;
+		font-size: 220px;
+		line-height: 1;
+		font-weight: 700;
+		color: $black1;
+
+		@media (max-width: 1480px) {
+			font-size: calc(140px + 80 * ((100vw - 320px) / (1480 - 320)));
+		}
+
+		span {
+			display: inline-block;
+
+			&:nth-child(1) {
+				animation: slideLeft 5s ease-in-out infinite;
+			}
+
+			&:nth-child(2) {
+				animation: scaleOut 5s 0.45s ease-in-out infinite;
+			}
+
+			&:nth-child(3) {
+				animation: slideRight 5s 0.2s ease-in-out infinite;
+			}
+		}
+	}
+
+	&__title {
+		font-weight: 500;
+		font-size: 28px;
+		color: $black1;
+		margin: 40px 0 0 0;
+
+		@media (max-width: 1480px) {
+			font-size: calc(18px + 10 * ((100vw - 320px) / (1480 - 320)));
+			margin: calc(12px + 28 * ((100vw - 320px) / (1480 - 320))) 0 0 0;
+		}
+	}
+
+	&__subtitle {
+		font-size: 18px;
+		color: $black2;
+		margin: 12px 0 0 0;
+
+		@media (max-width: 1480px) {
+			font-size: calc(14px + 4 * ((100vw - 320px) / (1480 - 320)));
+		}
+	}
+
+	.button {
+		height: 44px;
+		padding: 0 24px;
+		font-weight: 600;
+		font-size: 16px;
+		margin: 40px 0 0 0;
+
+		@media (max-width: 1480px) {
+			font-size: calc(14px + 2 * ((100vw - 320px) / (1480 - 320)));
+			padding: 0 calc(16px + 8 * ((100vw - 320px) / (1480 - 320)));
+			height: calc(38px + 6 * ((100vw - 320px) / (1480 - 320)));
+			margin: calc(20px + 20 * ((100vw - 320px) / (1480 - 320))) 0 0 0;
+		}
+	}
+}
+
+@keyframes slideLeft {
+	0% {
+		translate: 0 0;
+	}
+
+	10% {
+		translate: -20px 0;
+	}
+
+	40% {
+		translate: -20px 0;
+	}
+
+	50% {
+		translate: 0 0;
+	}
+
+	100% {
+		translate: 0 0;
+	}
+}
+
+@keyframes slideRight {
+	0% {
+		translate: 0 0;
+	}
+
+	10% {
+		translate: 20px 0;
+	}
+
+	40% {
+		translate: 20px 0;
+	}
+
+	50% {
+		translate: 0 0;
+	}
+
+	100% {
+		translate: 0 0;
+	}
+}
+
+@keyframes scaleOut {
+	0% {
+		rotate: 0deg;
+	}
+
+	40% {
+		rotate: 360deg;
+	}
+
+	100% {
+		rotate: 360deg;
+	}
+}

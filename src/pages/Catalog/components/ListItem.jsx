@@ -141,7 +141,7 @@ const ListItem = ({ interactiveFilterChange, data }) => {
 							<div>{setStatus(data.status)}</div>
 						</div>
 						<div className="catalog-item__prop">
-							<h3>SORUCE</h3>
+							<h3>SOURCE</h3>
 							<div>{data.source ? data.source : "?"}</div>
 						</div>
 					</div>

@@ -44,6 +44,10 @@ export const anidb = async ({ search, genres, type, status, page = 1 }) => {
 	).then((response) => response.json());
 };
 
+export const getAnime = async (id) => {
+	return await fetch(`https://api.jikan.moe/v4/anime/${id}`).then((response) => response.json());
+};
+
 export const genres = (genre) => {
 	const genres = {
 		Shounen: 27,
@@ -141,4 +145,25 @@ export const types = () => {
 
 export const hashString = (string) => {
 	return CryptoJS.MD5(string) + "";
+};
+
+export const months = (monthNumber) => {
+	const months = [
+		{ name: "January", number: "01" },
+		{ name: "February", number: "02" },
+		{ name: "March", number: "03" },
+		{ name: "April", number: "04" },
+		{ name: "May", number: "05" },
+		{ name: "June", number: "06" },
+		{ name: "July", number: "07" },
+		{ name: "August", number: "08" },
+		{ name: "September", number: "09" },
+		{ name: "October", number: "10" },
+		{ name: "November", number: "11" },
+		{ name: "December", number: "12" },
+	];
+
+	return monthNumber
+		? months.filter((month) => month.number === (monthNumber < 10 ? "0" + monthNumber : "" + monthNumber))[0].name
+		: months;
 };

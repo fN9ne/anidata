@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound/NotFound";
 import AppLayout from "./layouts/AppLayout";
 import { api } from "./functions";
 import RemoveAnime from "./components/Modal/RemoveAnime";
+import Anime from "./pages/Anime/Anime";
 
 const App = () => {
 	const location = useLocation();
@@ -35,7 +36,7 @@ const App = () => {
 		} else {
 			navigate("/auth");
 		}
-	}, []);
+	}, []); // eslint-disable-line
 
 	useEffect(() => {
 		const close = (event) => {
@@ -48,7 +49,7 @@ const App = () => {
 		document.body.addEventListener("keydown", close);
 
 		return () => document.body.removeEventListener("keydown", close);
-	}, []);
+	}, []); // eslint-disable-line
 
 	useEffect(() => {
 		window.onbeforeunload = pending ? () => false : null;
@@ -83,7 +84,7 @@ const App = () => {
 					console.log(error);
 				});
 		}
-	}, [pending, content]);
+	}, [pending, content]); // eslint-disable-line
 
 	return (
 		<main className="content">
@@ -95,6 +96,7 @@ const App = () => {
 						<Route index element={<Navigate to="list" />} />
 						<Route path="list" element={<List />} />
 						<Route path="catalog" element={<Catalog />} />
+						<Route path="anime/:id" element={<Anime />} />
 					</Route>
 					<Route path="*" element={<NotFound />} />
 				</Routes>

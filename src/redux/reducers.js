@@ -288,3 +288,25 @@ export const catalogActions = {
 	clearFilter: () => ({ type: CLEAR_FILTER }),
 	clearState: () => ({ type: CLEAR_STATE }),
 };
+
+/* anime single page reducer */
+
+const animeInitState = {
+	data: {},
+};
+
+const SET_ANIME = "SET_ANIME";
+
+export const animeReducer = (state = animeInitState, action) => {
+	switch (action.type) {
+		case SET_ANIME:
+			return {
+				...state,
+				data: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+
+export const setAnimeAction = (payload) => ({ type: SET_ANIME, payload });

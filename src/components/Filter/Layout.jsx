@@ -1,6 +1,6 @@
 import "./Filter.scss";
 import { opacity, scaleDown } from "../../animations";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { ReactComponent as FilterIcon } from "../../img/icons/filter.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
@@ -62,7 +62,7 @@ const Layout = ({ children, clear, onClick }) => {
 		document.body.addEventListener("keydown", close);
 
 		return () => document.body.removeEventListener("keydown", close);
-	}, []);
+	}, []); // eslint-disable-line
 
 	return (
 		<>

@@ -47,7 +47,7 @@ const Catalog = () => {
 			dispatch(catalogActions.setPage(1));
 			setInteractiveFilterChanged(false);
 		}
-	}, [isInteractiveFilterChanged]);
+	}, [isInteractiveFilterChanged]); // eslint-disable-line
 
 	useEffect(() => {
 		getResults();
@@ -57,7 +57,7 @@ const Catalog = () => {
 		if (filter.active) {
 			setFilterChanged(true);
 		}
-	}, [filter.genres.content, filter.type.content, filter.status.content]);
+	}, [filter.genres.content, filter.type.content, filter.status.content]); // eslint-disable-line
 
 	useEffect(() => {
 		if (isFilterChanged) {
@@ -65,11 +65,17 @@ const Catalog = () => {
 			setFilterChanged(false);
 			dispatch(catalogActions.setPage(1));
 		}
-	}, [filter.active]);
+	}, [filter.active]); // eslint-disable-line
 
 	useEffect(() => {
 		dispatch(catalogActions.setPage(1));
-	}, [search]);
+	}, [search]); // eslint-disable-line
+
+	useEffect(() => {
+		return () => {
+			dispatch(catalogActions.setFetching(true));
+		};
+	}, []); // eslint-disable-line
 
 	return (
 		<div className="catalog">
