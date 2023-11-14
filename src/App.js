@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { authorizeUserAction, catalogActions, closeAllModalsAction, togglePending } from "./redux/reducers";
+import { authorizeUserAction, catalogActions, closeAllModalsAction, resetYourAnimeState, togglePending } from "./redux/reducers";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 

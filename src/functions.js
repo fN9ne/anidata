@@ -37,7 +37,7 @@ export const anidb = async ({ search, genres, type, status, page = 1 }) => {
 		&page=${page}
 		&sort=desc
 		&limit=24
-		&order_by=score
+		&order_by=scored_by
 		${genres ? `&genres=${genres.join(",")}` : ""}
 		${type ? `&type=${type}` : ""}
 		${status ? `&status=${status}` : ""}`
@@ -45,7 +45,11 @@ export const anidb = async ({ search, genres, type, status, page = 1 }) => {
 };
 
 export const getAnime = async (id) => {
-	return await fetch(`https://api.jikan.moe/v4/anime/${id}`).then((response) => response.json());
+	return await fetch(`https://api.jikan.moe/v4/anime/${id}/full`).then((response) => response.json());
+};
+
+export const test = async (string) => {
+	return await fetch(`https://api.jikan.moe/v4/${string}`).then((response) => response.json());
 };
 
 export const genres = (genre) => {

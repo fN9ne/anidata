@@ -6,6 +6,7 @@ const userInitialState = {
 	content: [],
 	removeAnime: {},
 	pending: false,
+	loaded: false,
 };
 
 const AUTHORIZE_USER = "AUTHORIZE_USER";
@@ -13,8 +14,23 @@ const THROW_USER = "THROW_USER";
 const SET_ANIME_TO_REMOVE = "SET_ANIME_TO_REMOVE";
 const TOGGLE_ANIME = "TOGGLE_ANIME";
 const TOGGLE_PENDING = "TOGGLE_PENDING";
+const CHANGE_CONTENT = "CHANGE_CONTENT";
 
 export const userReducer = (state = userInitialState, action) => {
+	const content = state.content;
+	const contentIds = content.map((item) => item.id);
+
+	const newContentItem = (id) => {
+		return {
+			id: id,
+			status: "Watched",
+			isFavourite: false,
+			statusOptions: {
+				stoppedAt: null,
+			},
+		};
+	};
+
 	switch (action.type) {
 		case AUTHORIZE_USER:
 			localStorage.setItem("user", JSON.stringify({ username: action.payload.username, content: action.payload.content }));
@@ -23,6 +39,7 @@ export const userReducer = (state = userInitialState, action) => {
 				authorized: true,
 				username: action.payload.username,
 				content: action.payload.content,
+				loaded: true,
 			};
 		case THROW_USER:
 			localStorage.removeItem("user");
@@ -35,11 +52,20 @@ export const userReducer = (state = userInitialState, action) => {
 				...state,
 				removeAnime: action.payload,
 			};
+		case CHANGE_CONTENT:
+			localStorage.setItem("user", JSON.stringify({ username: state.username, content: action.payload }));
+
+			return {
+				...state,
+				content: action.payload,
+			};
 		case TOGGLE_ANIME:
-			const newContent = state.content.includes(action.payload)
-				? state.content.filter((id) => id !== action.payload)
-				: [...state.content, action.payload];
+			const newContent = contentIds.includes(action.payload)
+				? content.filter((item) => item.id !== action.payload)
+				: [...state.content, newContentItem(action.payload)];
+
 			localStorage.setItem("user", JSON.stringify({ username: state.username, content: newContent }));
+
 			return {
 				...state,
 				content: newContent,
@@ -59,6 +85,7 @@ export const throwUserAction = () => ({ type: THROW_USER });
 export const setAnimeToRemove = (payload) => ({ type: SET_ANIME_TO_REMOVE, payload });
 export const toggleAnime = (payload) => ({ type: TOGGLE_ANIME, payload });
 export const togglePending = (payload) => ({ type: TOGGLE_PENDING, payload });
+export const changeContent = (payload) => ({ type: CHANGE_CONTENT, payload });
 
 /* modal reducer */
 
@@ -310,3 +337,214 @@ export const animeReducer = (state = animeInitState, action) => {
 };
 
 export const setAnimeAction = (payload) => ({ type: SET_ANIME, payload });
+
+const yourAnimeInitState = {
+	data: [],
+	visible_data: [],
+	noFetchedData: [],
+	fetching: true,
+	isFullscreen: false,
+	search: "",
+	statisticsVisible: true,
+	filter: {
+		genres: {
+			active: false,
+			content: [],
+		},
+		type: {
+			active: false,
+			content: "",
+		},
+		status: {
+			active: false,
+			content: "",
+		},
+	},
+};
+
+const SET_YOUR_ANIME_DATA = "SET_YOUR_ANIME_DATA";
+const TOGGLE_YOUR_ANIME_FULLSCREEN = "TOGGLE_YOUR_ANIME_FULLSCREEN";
+const SET_YOUR_ANIME_SEARCH = "SET_YOUR_ANIME_SEARCH";
+const SET_YOUR_ANIME_FETCHING = "SET_YOUR_ANIME_FETCHING";
+const ADD_YOUR_ANIME_DATA = "ADD_YOUR_ANIME_DATA";
+const TOGGLE_STATISTICS_VISIBLE = "TOGGLE_STATISTICS_VISIBLE";
+
+const SET_YOUR_ANIME_VISIBLE_DATA = "SET_YOUR_ANIME_VISIBLE_DATA";
+
+const YOUR_ANIME_GENRES_SELECTBOX = "YOUR_ANIME_GENRES_SELECTBOX";
+const YOUR_ANIME_TYPE_SELECTBOX = "YOUR_ANIME_TYPE_SELECTBOX";
+const YOUR_ANIME_STATUS_SELECTBOX = "YOUR_ANIME_STATUS_SELECTBOX";
+
+const YOUR_ANIME_SET_GENRES = "YOUR_ANIME_SET_GENRES";
+const YOUR_ANIME_SET_TYPE = "YOUR_ANIME_SET_TYPE";
+const YOUR_ANIME_SET_STATUS = "YOUR_ANIME_SET_STATUS";
+
+const YOUR_ANIME_CLOSE_SELECTBOXES = "YOUR_ANIME_CLOSE_SELECTBOXES";
+
+const YOUR_ANIME_CLEAR_FILTER = "YOUR_ANIME_CLEAR_FILTER";
+
+const RESET_YOUR_ANIME_STATE = "RESET_YOUR_ANIME_STATE";
+
+export const yourAnimeReducer = (state = yourAnimeInitState, action) => {
+	const data = state.data;
+	const genres = state.filter.genres.content;
+	const type = state.filter.type.content;
+	const status = state.filter.status.content;
+
+	switch (action.type) {
+		case YOUR_ANIME_GENRES_SELECTBOX:
+			return {
+				...state,
+				filter: {
+					...state.filter,
+					genres: {
+						...state.filter.genres,
+						active: action.payload,
+					},
+				},
+			};
+		case YOUR_ANIME_TYPE_SELECTBOX:
+			return {
+				...state,
+				filter: {
+					...state.filter,
+					type: {
+						...state.filter.type,
+						active: action.payload,
+					},
+				},
+			};
+		case YOUR_ANIME_STATUS_SELECTBOX:
+			return {
+				...state,
+				filter: {
+					...state.filter,
+					status: {
+						...state.filter.status,
+						active: action.payload,
+					},
+				},
+			};
+		case YOUR_ANIME_SET_GENRES:
+			return {
+				...state,
+				filter: {
+					...state.filter,
+					genres: {
+						...state.filter.genres,
+						content: !genres.includes(action.payload)
+							? [...genres, action.payload]
+							: genres.filter((genre) => genre !== action.payload),
+					},
+				},
+			};
+		case YOUR_ANIME_SET_TYPE:
+			return {
+				...state,
+				filter: {
+					...state.filter,
+					type: {
+						...state.filter.type,
+						content: type !== action.payload ? action.payload : "",
+					},
+				},
+			};
+		case YOUR_ANIME_SET_STATUS:
+			return {
+				...state,
+				filter: {
+					...state.filter,
+					status: {
+						...state.filter.status,
+						content: status !== action.payload ? action.payload : "",
+					},
+				},
+			};
+		case YOUR_ANIME_CLOSE_SELECTBOXES:
+			return {
+				...state,
+				filter: {
+					genres: {
+						...state.filter.genres,
+						active: false,
+					},
+					type: {
+						...state.filter.type,
+						active: false,
+					},
+					status: {
+						...state.filter.status,
+						active: false,
+					},
+				},
+			};
+		case YOUR_ANIME_CLEAR_FILTER:
+			return {
+				...state,
+				filter: yourAnimeInitState.filter,
+			};
+		case SET_YOUR_ANIME_FETCHING:
+			return {
+				...state,
+				fetching: action.payload,
+			};
+		case SET_YOUR_ANIME_SEARCH:
+			return {
+				...state,
+				search: action.payload,
+			};
+		case ADD_YOUR_ANIME_DATA:
+			return {
+				...state,
+				data: [...data, action.payload],
+				visible_data: [...data, action.payload],
+			};
+		case SET_YOUR_ANIME_DATA:
+			return {
+				...state,
+				data: action.payload,
+				visible_data: action.payload,
+			};
+		case SET_YOUR_ANIME_VISIBLE_DATA:
+			return {
+				...state,
+				visible_data: action.payload,
+			};
+		case TOGGLE_YOUR_ANIME_FULLSCREEN:
+			return {
+				...state,
+				isFullscreen: action.payload,
+			};
+		case TOGGLE_STATISTICS_VISIBLE:
+			return {
+				...state,
+				statisticsVisible: action.payload,
+			};
+		case RESET_YOUR_ANIME_STATE:
+			return yourAnimeInitState;
+		default:
+			return state;
+	}
+};
+
+export const setYourAnimeDataAction = (payload) => ({ type: SET_YOUR_ANIME_DATA, payload });
+export const toggleYourAnimeFullscreenAction = (payload) => ({ type: TOGGLE_YOUR_ANIME_FULLSCREEN, payload });
+export const setYourAnimeSearchAction = (payload) => ({ type: SET_YOUR_ANIME_SEARCH, payload });
+export const setYourAnimeFetchingAction = (payload) => ({ type: SET_YOUR_ANIME_FETCHING, payload });
+export const addYourAnimeDataAction = (payload) => ({ type: ADD_YOUR_ANIME_DATA, payload });
+export const toggleStatisticsVisibleAction = (payload) => ({ type: TOGGLE_STATISTICS_VISIBLE, payload });
+
+export const yourAnimeGenresSelectbox = (payload) => ({ type: YOUR_ANIME_GENRES_SELECTBOX, payload });
+export const yourAnimeTypeSelectbox = (payload) => ({ type: YOUR_ANIME_TYPE_SELECTBOX, payload });
+export const yourAnimeStatusSelectbox = (payload) => ({ type: YOUR_ANIME_STATUS_SELECTBOX, payload });
+
+export const yourAnimeSetGenres = (payload) => ({ type: YOUR_ANIME_SET_GENRES, payload });
+export const yourAnimeSetType = (payload) => ({ type: YOUR_ANIME_SET_TYPE, payload });
+export const yourAnimeSetStatus = (payload) => ({ type: YOUR_ANIME_SET_STATUS, payload });
+
+export const yourAnimeCloseSelectboxes = (payload) => ({ type: YOUR_ANIME_CLOSE_SELECTBOXES, payload });
+export const yourAnimeClearFilter = (payload) => ({ type: YOUR_ANIME_CLEAR_FILTER, payload });
+
+export const setYourAnimeVisibleData = (payload) => ({ type: SET_YOUR_ANIME_VISIBLE_DATA, payload });
+
+export const resetYourAnimeState = () => ({ type: RESET_YOUR_ANIME_STATE });

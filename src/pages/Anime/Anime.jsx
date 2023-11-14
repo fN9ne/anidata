@@ -4,7 +4,7 @@ import Loader from "../../components/Loader/Loader";
 import Content from "./components/Content";
 
 import { useParams } from "react-router-dom";
-import { getAnime } from "../../functions";
+import { getAnime, test } from "../../functions";
 import { useEffect, useState } from "react";
 
 import { useDispatch } from "react-redux";
@@ -21,6 +21,7 @@ const Anime = () => {
 	const params = useParams();
 
 	useEffect(() => {
+		test("anime/" + params.id + "/recommendations").then((response) => console.log(response));
 		getAnime(params.id)
 			.then((response) => dispatch(setAnimeAction(response.data)))
 			.finally(() => setTimeout(() => setFetching(false), 350));

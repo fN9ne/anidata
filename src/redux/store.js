@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { animeReducer, catalogReducer, modalReducer, userReducer } from "./reducers";
+import { animeReducer, catalogReducer, modalReducer, userReducer, yourAnimeReducer } from "./reducers";
 
 const store = configureStore({
 	reducer: combineReducers({
@@ -7,6 +7,7 @@ const store = configureStore({
 		modal: modalReducer,
 		catalog: catalogReducer,
 		anime: animeReducer,
+		yourAnime: yourAnimeReducer,
 	}),
 });
 

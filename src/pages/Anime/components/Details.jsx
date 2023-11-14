@@ -27,16 +27,20 @@ const Details = () => {
 		}
 	};
 
+	const genres = [...data.genres, ...data.themes, ...data.demographics];
+
 	const list = [
 		{ label: "Episodes", value: data.episodes ? data.episodes : "?" },
 		{ label: "Status", value: setStatus(data.status) },
 		{ label: "Start date", value: getDate(data.aired.prop.from) },
 		{ label: "End date", value: getDate(data.aired.prop.to) },
+		{ label: "Source", value: data.source ? data.source : "?" },
+		{ label: "Rating", value: data.rating ? data.rating : "?" },
 		{
 			label: "Studios",
-			value: [data.studios.map((studio) => studio.name)],
+			value: data.studios.length !== 0 ? [data.studios.map((studio) => studio.name)] : "?",
 		},
-		{ label: "Genres", value: [...data.genres, ...data.themes, ...data.demographics].map((genre) => genre.name) },
+		{ label: "Genres", value: genres.length !== 0 ? genres.map((genre) => genre.name) : ["?"] },
 	];
 
 	return (

@@ -15,7 +15,7 @@ const Content = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const isAnimeAdded = content.includes(data.mal_id);
+	const isAnimeAdded = content.map((item) => item.id).includes(data.mal_id);
 
 	const handleToggleAnime = () => {
 		if (!isAnimeAdded) {

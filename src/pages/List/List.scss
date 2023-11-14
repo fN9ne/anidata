@@ -1,0 +1,434 @@
+@import '../../scss/vars';
+
+.animelist {
+	padding: 40px 0 20px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+
+	.statusbar {
+		margin: 20px 0 0 0;
+	}
+
+	&__content {
+		height: 100%;
+		margin: 20px 0 0 0;
+		padding: 0 20px 0 0;
+		overflow: auto;
+	}
+
+	&__track {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	&__empty {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		gap: 10px;
+
+		div {
+			font-weight: 500;
+			font-size: 20px;
+			line-height: 1.5;
+			max-width: 465px;
+			text-align: center;
+			color: $black1;
+		}
+	}
+}
+
+.animelist-loader {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	justify-content: center;
+	align-items: center;
+
+	&__text {
+		font-size: 16px;
+		font-weight: 400;
+		color: $black1;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+
+		span {
+			font-weight: 600;
+			font-size: 18px;
+		}
+	}
+
+	&__bar {
+		width: 200px;
+		height: 6px;
+		border: 1px solid $black1;
+	}
+
+	&__line {
+		width: 0;
+		height: 100%;
+		background-color: #3aafd3;
+	}
+}
+
+.animelist-statistics {
+	margin: 40px 0 0 0;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+
+	&__header {
+		display: flex;
+		align-items: center;
+		align-self: flex-start;
+		gap: 12px;
+		cursor: pointer;
+		transition: 350ms;
+
+		&:hover {
+			@media #{$mouse-device} {
+				opacity: 0.75;
+				scale: 0.95;
+			}
+		}
+
+		svg {
+			transition: 350ms;
+		}
+
+		&_hidden {
+			svg {
+				rotate: 180deg;
+			}
+		}
+	}
+
+	&__content {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&__block {
+		display: flex;
+		gap: 20px;
+	}
+
+	&__item {
+		padding: 20px 40px 20px 16px;
+		border-radius: 15px;
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+
+		&_total {
+			background-color: #F6F6F6;
+
+			.animelist-statistics__icon {
+				background-color: #ddd;
+			}
+		}
+
+		&_watched {
+			background-color: #D7F5DA;
+
+			.animelist-statistics__icon {
+				background-color: #BAE9BC;
+			}
+		}
+
+		&_progress {
+			background-color: #FCFFD6;
+
+			.animelist-statistics__icon {
+				background-color: #F8EFBE;
+			}
+		}
+
+		&_plans {
+			background-color: #FAE1E1;
+
+			.animelist-statistics__icon {
+				background-color: #F5C6C6;
+			}
+		}
+	}
+
+	&__icon {
+		border-radius: 15px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 50px;
+		height: 50px;
+	}
+
+	&__main {
+		display: flex;
+		gap: 16px;
+	}
+
+	&__num {
+		font-weight: 900;
+		line-height: 50px;
+		font-size: 52px;
+		color: $black1;
+	}
+
+	&__desc {
+		padding: 0 0 0 10px;
+		font-size: 16px;
+		color: $black2;
+	}
+}
+
+.animelist-item {
+	flex: 0 0 calc(50% - 5px);
+	border: 2px solid $border1;
+	border-radius: 15px;
+	padding: 10px;
+
+	&__wrapper {
+		height: 100%;
+		display: flex;
+		gap: 14px;
+	}
+
+	&__image {
+		flex: 0 0 166px;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-radius: 10px;
+			box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);
+		}
+	}
+
+	&__year {
+		line-height: 32px;
+	}
+
+	&__header {
+		display: flex;
+		flex-direction: column;
+
+		div {
+			display: flex;
+			gap: 8px;
+		}
+
+		h2,
+		h4 {
+			text-overflow: ellipsis;
+			line-height: 32px;
+			white-space: nowrap;
+			overflow: hidden;
+		}
+	}
+
+	&__body {
+		max-width: 315px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	&__props {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-end;
+		gap: 8px;
+	}
+
+	&__footer {
+		margin: 16px 0 0 0;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: flex-end;
+		gap: 8px;
+	}
+
+	&__prop {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 4px;
+
+		&-text {
+			padding: 6px 12px;
+			border-radius: 8px;
+			color: $black1;
+			font-size: 12px;
+			line-height: 16px;
+
+			&_plans {
+				background-color: #F4C0C0;
+			}
+		}
+	}
+}
+
+.animelist-item-genres {
+	margin: 16px 0 0 0;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+
+	&__content {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px;
+	}
+
+	&__item {
+		color: $black1;
+		border-radius: 4px;
+		padding: 6px 8px 5px;
+		background-color: #E4E5FF;
+	}
+}
+
+.animelist-dropdown {
+	&__button {
+		padding: 6px 12px;
+		font-size: 12px;
+		border-radius: 8px;
+		color: $black1;
+		line-height: 16px;
+		cursor: pointer;
+		transition: 350ms;
+		position: relative;
+		z-index: 2;
+
+		&_watched {
+			background-color: #BAE9BC;
+		}
+
+		&_progress {
+			background-color: #F0E7B5;
+		}
+
+		&_plans {
+			background-color: #F4C0C0;
+		}
+
+		&_active {
+			z-index: 4;
+		}
+
+		&:hover {
+			@media #{$mouse-device} {
+				opacity: 0.75;
+				scale: 0.95;
+			}
+		}
+	}
+
+	&__content {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 3;
+		background-color: rgba(35, 37, 55, 0.80);
+	}
+
+	&__body {
+		position: absolute;
+		z-index: 5;
+		border-radius: 8px;
+		border: 2px solid #BCBDD8;
+		background-color: #f6f6f6;
+		padding: 8px;
+		width: 180px;
+
+		&_big {
+			height: 240px;
+		}
+	}
+
+	&__list {
+		height: 100%;
+		padding: 0 4px 0 0;
+		overflow: auto;
+	}
+
+	&__track {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	&__radio {
+		width: 18px;
+		height: 18px;
+		border-radius: 50%;
+		background-color: rgba(228, 229, 255, 0.7);
+		transition: 350ms;
+		position: relative;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 12px;
+			height: 12px;
+			border-radius: 50%;
+			translate: -50% -50%;
+			background-color: #acaeff;
+			scale: 0;
+			opacity: 0;
+			transition: 350ms;
+		}
+	}
+
+	&__item {
+		border: 2px solid $border2;
+		height: 40px;
+		border-radius: 8px;
+		padding: 0 8px;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		transition: 350ms;
+		cursor: pointer;
+
+		span {
+			font-weight: 500;
+			color: $black1;
+		}
+
+		&:hover {
+			@media #{$mouse-device} {
+				border-color: $border2hover;
+
+				.animelist-dropdown__radio {
+					background-color: #dedfff;
+				}
+			}
+		}
+
+		&_active {
+			border-color: $border2active;
+
+			.animelist-dropdown__radio {
+				background-color: #dedfff;
+
+				&::before {
+					scale: 1;
+					opacity: 1;
+				}
+			}
+		}
+	}
+}

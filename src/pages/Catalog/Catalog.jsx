@@ -25,6 +25,8 @@ const Catalog = () => {
 	const [isFilterChanged, setFilterChanged] = useState(false);
 	const [isInteractiveFilterChanged, setInteractiveFilterChanged] = useState(false);
 
+	const [firstLoad, setFirstLoad] = useState(false);
+
 	const getResults = () => {
 		dispatch(catalogActions.setFetching(true));
 		anidb({
@@ -37,9 +39,18 @@ const Catalog = () => {
 			.then((response) => {
 				dispatch(catalogActions.setResult(response.data));
 				dispatch(catalogActions.setMaxPages(response.pagination.last_visible_page));
+				setFirstLoad(true);
 			})
 			.then(() => setTimeout(() => dispatch(catalogActions.setFetching(false)), 350));
 	};
+
+	useEffect(() => {
+		if (result.length === 0) {
+			getResults();
+		} else {
+			setFirstLoad(true);
+		}
+	}, []);
 
 	useEffect(() => {
 		if (isInteractiveFilterChanged) {
@@ -50,8 +61,17 @@ const Catalog = () => {
 	}, [isInteractiveFilterChanged]); // eslint-disable-line
 
 	useEffect(() => {
-		getResults();
-	}, [search, page]); // eslint-disable-line
+		if (firstLoad) {
+			getResults();
+			dispatch(catalogActions.setPage(1));
+		}
+	}, [search]); // eslint-disable-line
+
+	useEffect(() => {
+		if (firstLoad) {
+			getResults();
+		}
+	}, [page]);
 
 	useEffect(() => {
 		if (filter.active) {
@@ -66,16 +86,6 @@ const Catalog = () => {
 			dispatch(catalogActions.setPage(1));
 		}
 	}, [filter.active]); // eslint-disable-line
-
-	useEffect(() => {
-		dispatch(catalogActions.setPage(1));
-	}, [search]); // eslint-disable-line
-
-	useEffect(() => {
-		return () => {
-			dispatch(catalogActions.setFetching(true));
-		};
-	}, []); // eslint-disable-line
 
 	return (
 		<div className="catalog">

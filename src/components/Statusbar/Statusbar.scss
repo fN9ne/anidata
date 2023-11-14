@@ -1,3 +1,5 @@
+@import '../../scss/vars';
+
 .statusbar {
 	display: flex;
 	justify-content: space-between;
@@ -5,7 +7,7 @@
 	&__main {
 		display: flex;
 		align-items: center;
-		gap: 24px;
+		gap: 28px;
 
 		@media (max-width: 768px) {
 			gap: 8px;
@@ -14,6 +16,39 @@
 		@media (max-width: 424px) {
 			width: 100%;
 			justify-content: space-between;
+		}
+	}
+
+	&__activities {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+	}
+
+	&__fullscreen {
+		width: 30px;
+		height: 30px;
+		background-color: transparent;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		svg {
+			width: 12px;
+			height: 12px;
+
+			path {
+				fill: $black2;
+				transition: 350ms;
+			}
+		}
+
+		&:hover {
+			@media #{$mouse-device} {
+				svg path {
+					fill: $black1;
+				}
+			}
 		}
 	}
 

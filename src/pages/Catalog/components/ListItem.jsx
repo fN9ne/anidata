@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
 	catalogActions,
 	setAnimeToRemove,
+	setYourAnimeFetchingAction,
 	toggleAnime,
 	togglePending,
 	toggleRemoveAnimeModalAction,
@@ -56,13 +57,14 @@ const ListItem = ({ interactiveFilterChange, data }) => {
 	const genres = [...data.genres, ...data.themes, ...data.demographics].map((genre) => genre.name);
 
 	const isAnimeAdded = (id) => {
-		return yourAnimeList.includes(id);
+		return yourAnimeList.map((item) => item.id).includes(id);
 	};
 
 	const handleToggleAnime = () => {
 		if (!isAnimeAdded(data.mal_id)) {
 			dispatch(toggleAnime(data.mal_id));
 			dispatch(togglePending(true));
+			dispatch(setYourAnimeFetchingAction(true));
 		} else {
 			dispatch(setAnimeToRemove({ name: data.title_english ? data.title_english : data.title, id: data.mal_id }));
 			dispatch(toggleRemoveAnimeModalAction(true));

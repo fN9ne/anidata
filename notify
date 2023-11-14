@@ -1,11 +1,13 @@
-anime single page
+# your anime page
 
-- page
-- responsive
+- фильтр
+- фуллскрин
+- адаптив
+- сортировка
 
-your anime page
+# catalog page
 
-- page
-- responsive
-
-hints
+- сортировка
+- подсказка
+- сделать, чтобы по клику на название аниме открывалась страница с аниме
+- фильтр по году

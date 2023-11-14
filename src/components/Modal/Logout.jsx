@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Layout from "./Layout";
-import { toggleLogoutModalAction, throwUserAction, catalogActions } from "../../redux/reducers";
+import { toggleLogoutModalAction, throwUserAction, catalogActions, resetYourAnimeState } from "../../redux/reducers";
 
 const Logout = () => {
 	const dispatch = useDispatch();
@@ -12,6 +12,9 @@ const Logout = () => {
 		closeModal();
 		dispatch(throwUserAction());
 		dispatch(catalogActions.clearState());
+		setTimeout(() => {
+			dispatch(resetYourAnimeState());
+		}, 1000);
 		navigate("/auth");
 	};
 
